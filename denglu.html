@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/my_css.css" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <title></title>
+</head>
+<body>
+    <script src="js/jquery.cookie.js"></script>
+    <div class="container-fluid zhuce_inex">
+        <div class="container text-align">
+            <div class="dengl">
+                <img src="images/denglu_wenzi.png" />
+                <form>
+                    <div>
+                        <p>使用站内账号登录中艺</p>
+                        <div class="dengl_zc0 dengl_zc" data-tishi="正常登录" data-data="1">
+                            <div class="dengl_shuru">
+                                <input type="text" autofocus id="zhangh" placeholder="帐号" />
+                                <span class="glyphicon glyphicon-user"></span>
+                                <b>×</b>
+                            </div>
+                            <div class="dengl_shuru">
+                                <input type="password" id="mima" placeholder="密码" />
+                                <span class="glyphicon glyphicon-lock"></span>
+                                <b>×</b>
+                            </div>
+                            <div class="dengl_zt">
+                                <div class="col-md-6 col-xs-6 col-sm-6">
+                                    <input type="checkbox" id="rmbUser" />
+                                    <span>记住用户名</span>
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6">
+                                    <a href="index.html">随便看看</a>
+                                    <span class="sanjiao_left"></span>
+                                    <span class="sanjiao_left"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn_quan">
+                                    登录
+                                </button>
+                            </div>
+                            <div class="denglu_pd" style="">
+                                <div class="col-md-8 col-xs-8 col-sm-8" style="text-align:left">
+                                    <!--  失败后给SPAN添加类  dengl_shib  !  修改失败提醒文字-为类名 dl_cuowu_xx 的text-->
+                                    <span class="dl_tshi "><b class="glyphicon glyphicon-info-sign "></b><b class="dl_cuowu_xx">请输入完整账号信息后点击登录按钮</b></span>
+                                </div>
+                                <div class="col-md-4 col-xs-4 col-sm-4" style="text-align:right">
+                                    <a href="zhaohui_mm_1.html">忘记密码</a> | <a href="zhuce.html">注册</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="dengl_zc1 dengl_zc" data-tishi="微信登录" data-data="0">
+                    <iframe src="https://open.weixin.qq.com/connect/qrconnect?appid=wxc647038958e8d36d&scope=snsapi_login&redirect_uri=http://www.52tx.com/Login/Weixinback&state=sdglsfsdsdff&login_type=jssdk"
+                            frameborder="0" scrolling="no" width="360" height="400"></iframe>
+                </div>
+
+                <div class="divcss5 weixin1" data-data="1">
+                    <span></span>
+                    <a style="letter-spacing:2px" id="goto_wx_denglu" class="now">微信登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".dengl_zc1").hide();
+
+            $(".divcss5").click(function () {
+                $(".dengl_zc").hide();
+
+                var a = $(this).attr("data-data");
+                var b = $(".dengl_zc" + a + "").attr("data-tishi");
+                var c = $(".dengl_zc" + a + "").attr("data-data");
+            //    alert(a + ":" + b);
+                $(".dengl_zc" + a + "").show();
+                $("#goto_wx_denglu").text(b);
+                $(this).attr("data-data", c);
+
+            });
+            $("#goto_zc_denglu").click(function () {
+                $("#ZCdenglu").show();
+                $("#WZdenglu").hide();
+                $("#goto_wx_denglu").text("微信登录");
+            });
+
+            //定义高为全屏
+            $(".zhuce_inex").height($(window).height());
+
+            //输入框获取焦点
+            $(".dengl_shuru input").focus(function () {
+                $(".dengl_shuru input").attr("class", "");
+                $(this).attr("class", "bor_clr_huang");
+                $(".dengl_shuru input").siblings("b").hide();
+                $(this).siblings("b").show();
+            });
+
+            //输入框失去焦点
+            $(".dengl_shuru input").blur(function () {
+                $(".dengl_shuru input").attr("class", "");
+            });
+
+            //点击输入框内的删除标记
+            $(".dengl_shuru>b").click(function () {
+                $(this).siblings("input").val("");
+                $(this).siblings("input").focus();
+            });
+
+            //判断
+            $(".btn_quan").click(function () {
+                if ($("#zhangh").val() == "") {
+                    $(".dl_cuowu_xx").text("请输入用户帐号");
+                };
+            });
+
+            //记住用户名
+            $("#zhangh").blur(function () {
+                if (("#zhangh").text == "") {
+                    $(".dl_cuowu_xx").text("请输入用户帐号");
+                }
+            });
+        })
+    </script>
+</body>
+</html>
